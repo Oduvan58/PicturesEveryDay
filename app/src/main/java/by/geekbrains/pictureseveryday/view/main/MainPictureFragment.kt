@@ -5,7 +5,9 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import by.geekbrains.pictureseveryday.R
@@ -13,6 +15,7 @@ import by.geekbrains.pictureseveryday.databinding.FragmentMainPictureBinding
 import by.geekbrains.pictureseveryday.viewmodel.AppState
 import by.geekbrains.pictureseveryday.viewmodel.MainPictureViewModel
 import coil.api.load
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 class MainPictureFragment : Fragment() {
 
@@ -22,6 +25,10 @@ class MainPictureFragment : Fragment() {
     private val viewModel: MainPictureViewModel by lazy {
         ViewModelProvider(this)[MainPictureViewModel::class.java]
     }
+
+    private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
+    private lateinit var bottomSheetHeader: TextView
+    private lateinit var bottomSheetContent: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,6 +41,9 @@ class MainPictureFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setBottomSheetBehaviour(view.findViewById(R.id.bottom_sheet_container))
+        bottomSheetHeader = view.findViewById(R.id.description_header_text_view_bottom_sheet)
+        bottomSheetContent = view.findViewById(R.id.description_text_view_bottom_sheet)
         viewModel.getLiveData()
             .observe(viewLifecycleOwner, androidx.lifecycle.Observer { renderData(it) })
     }
@@ -55,6 +65,8 @@ class MainPictureFragment : Fragment() {
                         error(R.drawable.ic_load_error)
                         placeholder(R.drawable.ic_no_photo)
                     }
+                    bottomSheetHeader.text = serverResponseData.title
+                    bottomSheetContent.text = serverResponseData.explanation
                 }
             }
 
@@ -82,6 +94,28 @@ class MainPictureFragment : Fragment() {
         }
     }
 
+    private fun setBottomSheetBehaviour(bottomSheet: ConstraintLayout) {
+        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+
+        bottomSheetBehavior.addBottomSheetCallback(object :
+            BottomSheetBehavior.BottomSheetCallback() {
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                when (newState) {
+                    BottomSheetBehavior.STATE_DRAGGING -> toast("STATE_DRAGGING")
+                    BottomSheetBehavior.STATE_COLLAPSED -> toast("STATE_COLLAPSED")
+                    BottomSheetBehavior.STATE_EXPANDED -> toast("STATE_EXPANDED")
+                    BottomSheetBehavior.STATE_HALF_EXPANDED -> toast("STATE_HALF_EXPANDED")
+                    BottomSheetBehavior.STATE_HIDDEN -> toast("STATE_HIDDEN")
+                    BottomSheetBehavior.STATE_SETTLING -> toast("STATE_SETTLING")
+                }
+            }
+
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+            }
+        })
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -89,6 +123,5 @@ class MainPictureFragment : Fragment() {
 
     companion object {
         fun newInstance() = MainPictureFragment()
-        private var isMain = true
     }
 }

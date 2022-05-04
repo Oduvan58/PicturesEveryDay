@@ -1,34 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main_picture_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <by.geekbrains.pictureseveryday.view.main.EquilateralImageView
-        android:id="@+id/main_image_view"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main_picture_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:contentDescription="@string/photo_of_the_day_stub"
-        android:scaleType="fitCenter"
-        app:srcCompat="@drawable/ic_no_photo"
-        tools:ignore="MissingConstraints" />
+        android:paddingStart="@dimen/padding_main_picture_fragment"
+        android:paddingEnd="@dimen/padding_main_picture_fragment">
 
-    <FrameLayout
-        android:id="@+id/loading_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white"
-        android:visibility="gone"
-        tools:visibility="gone">
+        <by.geekbrains.pictureseveryday.view.main.EquilateralImageView
+            android:id="@+id/main_image_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:contentDescription="@string/photo_of_the_day_stub"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/ic_no_photo"
+            tools:ignore="MissingConstraints" />
 
-        <ProgressBar
-            style="?android:attr/progressBarStyleLarge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center" />
-    </FrameLayout>
+        <FrameLayout
+            android:id="@+id/loading_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:visibility="gone"
+            tools:visibility="gone">
 
-</FrameLayout>
+            <ProgressBar
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+        </FrameLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <include layout="@layout/bottom_sheet_layout" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

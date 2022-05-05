@@ -2,7 +2,7 @@
     <string name="app_name">Pictures Every Day</string>
     <string name="photo_of_the_day_stub">Photo of the day</string>
     <string name="search_wiki">Найти в Википедии</string>
-    <string name="wiki_helper_text">Поищите термин в википедии</string>
+    <string name="wiki_helper_text">Поищите в википедии</string>
     <string name="favourite">Favourite</string>
     <string name="settings">Settings</string>
     <string name="search">Search</string>

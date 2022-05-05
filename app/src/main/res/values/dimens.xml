@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="padding_main_picture_fragment">10dp</dimen>
-    <dimen name="behavior_peek_height_bottom_sheet">50dp</dimen>
+    <dimen name="behavior_peek_height_bottom_sheet">100dp</dimen>
     <dimen name="line_width_bottom_sheet">25dp</dimen>
     <dimen name="line_height_bottom_sheet">1dp</dimen>
     <dimen name="line_margin_top_bottom_sheet">5dp</dimen>
@@ -15,4 +15,7 @@
     <dimen name="padding_end_main_picture_fragment">10dp</dimen>
     <dimen name="corner_radius_text_input_edit_text">15dp</dimen>
     <dimen name="margin_top_text_input_layout">10dp</dimen>
+    <dimen name="cradle_margin_fab">8dp</dimen>
+    <dimen name="cradle_rounded_corner_radius_fab">50dp</dimen>
+    <dimen name="margin_bottom_navigation_layout">8dp</dimen>
 </resources>

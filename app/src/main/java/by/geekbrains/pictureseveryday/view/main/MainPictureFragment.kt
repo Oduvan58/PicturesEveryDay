@@ -3,20 +3,20 @@ package by.geekbrains.pictureseveryday.view.main
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.view.Gravity
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import by.geekbrains.pictureseveryday.R
 import by.geekbrains.pictureseveryday.databinding.FragmentMainPictureBinding
+import by.geekbrains.pictureseveryday.view.MainActivity
 import by.geekbrains.pictureseveryday.viewmodel.AppState
 import by.geekbrains.pictureseveryday.viewmodel.MainPictureViewModel
 import coil.api.load
+import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 class MainPictureFragment : Fragment() {
@@ -43,6 +43,7 @@ class MainPictureFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setBottomAppBar(view)
         binding.textInputLayout.setEndIconOnClickListener {
             startActivity(Intent(Intent.ACTION_VIEW).apply {
                 data =
@@ -124,6 +125,54 @@ class MainPictureFragment : Fragment() {
         })
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_bottom_bar_screens, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.app_bar_favorite -> toast(getString(R.string.favourite))
+            R.id.app_bar_settings -> toast(getString(R.string.settings))
+            android.R.id.home -> {
+                activity?.let {
+                    BottomNavigationDrawerFragment().show(it.supportFragmentManager, "")
+                }
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun setBottomAppBar(view: View) {
+        val context = activity as MainActivity
+        context.setSupportActionBar(view.findViewById(R.id.bottom_app_bar))
+        setHasOptionsMenu(true)
+        binding.mainFab.setOnClickListener {
+            if (isMain) {
+                isMain = false
+                with(binding) {
+                    bottomAppBar.navigationIcon = null
+                    bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_END
+                    mainFab.setImageDrawable(ContextCompat.getDrawable(context,
+                        R.drawable.ic_baseline_arrow_back))
+                    bottomAppBar.replaceMenu(R.menu.menu_search_bottom_bar)
+                }
+            } else {
+                isMain = true
+                with(binding) {
+                    bottomAppBar.navigationIcon = ContextCompat.getDrawable(
+                        context,
+                        R.drawable.ic_menu_bottom_bar
+                    )
+                    bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_CENTER
+                    mainFab.setImageDrawable(ContextCompat.getDrawable(context,
+                        R.drawable.ic_baseline_add_24))
+                    bottomAppBar.replaceMenu(R.menu.menu_bottom_bar_screens)
+                }
+            }
+        }
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -131,5 +180,6 @@ class MainPictureFragment : Fragment() {
 
     companion object {
         fun newInstance() = MainPictureFragment()
+        private var isMain = true
     }
 }

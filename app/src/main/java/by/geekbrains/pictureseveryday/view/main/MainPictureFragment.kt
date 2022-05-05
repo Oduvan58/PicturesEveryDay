@@ -1,5 +1,7 @@
 package by.geekbrains.pictureseveryday.view.main
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -41,6 +43,12 @@ class MainPictureFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.textInputLayout.setEndIconOnClickListener {
+            startActivity(Intent(Intent.ACTION_VIEW).apply {
+                data =
+                    Uri.parse("https://en.wikipedia.org/wiki/${binding.textInputEditText.text.toString()}")
+            })
+        }
         setBottomSheetBehaviour(view.findViewById(R.id.bottom_sheet_container))
         bottomSheetHeader = view.findViewById(R.id.description_header_text_view_bottom_sheet)
         bottomSheetContent = view.findViewById(R.id.description_text_view_bottom_sheet)

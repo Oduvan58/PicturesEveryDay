@@ -18,4 +18,6 @@
     <dimen name="cradle_margin_fab">8dp</dimen>
     <dimen name="cradle_rounded_corner_radius_fab">50dp</dimen>
     <dimen name="margin_bottom_navigation_layout">8dp</dimen>
+    <dimen name="image_view_layout_width">409dp</dimen>
+    <dimen name="image_view_layout_height">481dp</dimen>
 </resources>

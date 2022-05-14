@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="none">
+        <item
+            android:id="@+id/archive"
+            android:icon="@drawable/ic_baseline_archive_24"
+            android:title="@string/screen_archive" />
+        <item
+            android:id="@+id/send"
+            android:icon="@drawable/ic_baseline_send_24"
+            android:title="@string/screen_send" />
+    </group>
+</menu>

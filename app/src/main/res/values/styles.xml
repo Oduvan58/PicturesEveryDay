@@ -23,6 +23,21 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:paddingStart">@dimen/header_padding_start_bottom_sheet</item>
         <item name="android:paddingEnd">@dimen/header_padding_end_bottom_sheet</item>
-        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="BottomSheetHeaderTextAppearance">
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/steel_blue</item>
+        <item name="android:textSize">18sp</item>
+        <item name="font">@font/monterey</item>
+    </style>
+
+    <style name="BottomSheetDescriptionTextAppearance">
+        <item name="android:textStyle">normal</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/steel_blue</item>
+        <item name="android:textSize">14sp</item>
+        <item name="font">@font/monterey</item>
     </style>
 </resources>

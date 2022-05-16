@@ -24,7 +24,7 @@
         android:id="@+id/description_header_text_view_bottom_sheet"
         style="@style/bottom_sheet_text_view_style"
         android:layout_marginTop="@dimen/header_margin_top_bottom_sheet"
-        android:textStyle="bold"
+        android:textAppearance="@style/BottomSheetHeaderTextAppearance"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/line_view_bottom_sheet" />
@@ -32,6 +32,7 @@
     <TextView
         android:id="@+id/description_text_view_bottom_sheet"
         style="@style/bottom_sheet_text_view_style"
+        android:textAppearance="@style/BottomSheetDescriptionTextAppearance"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/description_header_text_view_bottom_sheet" />

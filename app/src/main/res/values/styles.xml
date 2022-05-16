@@ -2,7 +2,7 @@
 <resources>
 
     <style name="equilateral_image_view_style">
-        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:layout_gravity">center</item>
         <item name="android:scaleType">fitCenter</item>
     </style>
 
@@ -16,5 +16,13 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:backgroundTint">@color/teal_200</item>
+    </style>
+
+    <style name="bottom_sheet_text_view_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingStart">@dimen/header_padding_start_bottom_sheet</item>
+        <item name="android:paddingEnd">@dimen/header_padding_end_bottom_sheet</item>
+        <item name="android:textColor">@color/black</item>
     </style>
 </resources>

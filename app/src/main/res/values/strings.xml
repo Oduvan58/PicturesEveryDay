@@ -8,4 +8,9 @@
     <string name="search">Search</string>
     <string name="screen_archive">Archive</string>
     <string name="screen_send">Send</string>
+
+    <string name="settings_name_text">Выбор темы приложения</string>
+    <string name="app_theme">App Theme</string>
+    <string name="blue_theme">Blue Theme</string>
+    <string name="red_theme">Red Theme</string>
 </resources>

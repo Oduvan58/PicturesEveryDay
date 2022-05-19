@@ -43,17 +43,15 @@
 
         <by.geekbrains.pictureseveryday.view.main.EquilateralImageView
             android:id="@+id/main_image_view"
+            style="@style/equilateral_image_view_style"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_gravity="center_horizontal"
+            android:layout_height="@dimen/image_view_layout_height"
             android:contentDescription="@string/photo_of_the_day_stub"
-            android:scaleType="fitCenter"
-            app:layout_constraintBottom_toBottomOf="@id/main_picture_fragment"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/main_picture_fragment"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_input_layout"
-            app:srcCompat="@drawable/ic_no_photo"
-            tools:layout_editor_absoluteX="10dp" />
+            app:srcCompat="@drawable/ic_no_photo" />
 
         <FrameLayout
             android:id="@+id/loading_layout"
@@ -61,7 +59,8 @@
             android:layout_height="match_parent"
             android:background="@color/white"
             android:visibility="gone"
-            tools:visibility="gone">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="@id/main_image_view">
 
             <ProgressBar
                 style="?android:attr/progressBarStyleLarge"
@@ -75,10 +74,8 @@
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottom_app_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        app:backgroundTint="@color/purple_500"
+        style="@style/bottom_app_bar_style"
+        app:backgroundTint="?attr/colorPrimary"
         app:fabAlignmentMode="center"
         app:fabCradleMargin="@dimen/cradle_margin_fab"
         app:fabCradleRoundedCornerRadius="@dimen/cradle_rounded_corner_radius_fab"
@@ -88,9 +85,7 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/main_fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/teal_200"
+        style="@style/fab_style"
         app:layout_anchor="@id/bottom_app_bar"
         app:srcCompat="@drawable/ic_baseline_add_24"
         app:tint="@color/white"

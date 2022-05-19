@@ -18,4 +18,12 @@
     <dimen name="cradle_margin_fab">8dp</dimen>
     <dimen name="cradle_rounded_corner_radius_fab">50dp</dimen>
     <dimen name="margin_bottom_navigation_layout">8dp</dimen>
+    <dimen name="image_view_layout_width">409dp</dimen>
+    <dimen name="image_view_layout_height">481dp</dimen>
+
+    <dimen name="settings_title_margin_top">20dp</dimen>
+    <dimen name="settings_title_text_size">25sp</dimen>
+    <dimen name="horizontal_scroll_in_settings_margin_top">15dp</dimen>
+    <dimen name="chip_text_size">20sp</dimen>
+    <dimen name="chip_from_chipgroup_margin_start_end">30dp</dimen>
 </resources>

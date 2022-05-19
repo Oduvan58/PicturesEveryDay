@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import by.geekbrains.pictureseveryday.R
 import by.geekbrains.pictureseveryday.databinding.FragmentMainPictureBinding
 import by.geekbrains.pictureseveryday.view.MainActivity
+import by.geekbrains.pictureseveryday.view.details.SettingsFragment
 import by.geekbrains.pictureseveryday.viewmodel.AppState
 import by.geekbrains.pictureseveryday.viewmodel.MainPictureViewModel
 import coil.api.load
@@ -54,7 +55,7 @@ class MainPictureFragment : Fragment() {
         bottomSheetHeader = view.findViewById(R.id.description_header_text_view_bottom_sheet)
         bottomSheetContent = view.findViewById(R.id.description_text_view_bottom_sheet)
         viewModel.getLiveData()
-            .observe(viewLifecycleOwner, androidx.lifecycle.Observer { renderData(it) })
+            .observe(viewLifecycleOwner) { renderData(it) }
     }
 
     private fun renderData(state: AppState) {
@@ -133,12 +134,19 @@ class MainPictureFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.app_bar_favorite -> toast(getString(R.string.favourite))
-            R.id.app_bar_settings -> toast(getString(R.string.settings))
+            R.id.app_bar_settings -> activity?.apply {
+                this.supportFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.settings_fragment_container, SettingsFragment())
+                    .addToBackStack("")
+                    .commit()
+            }
             android.R.id.home -> {
                 activity?.let {
                     BottomNavigationDrawerFragment().show(it.supportFragmentManager, "")
                 }
             }
+            R.id.app_bar_search -> toast(getString(R.string.search))
         }
         return super.onOptionsItemSelected(item)
     }

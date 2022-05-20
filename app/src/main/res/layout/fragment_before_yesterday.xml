@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <by.geekbrains.pictureseveryday.view.main.EquilateralImageView
+        android:id="@+id/before_yesterday_image_view"
+        style="@style/equilateral_image_view_style"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/image_view_layout_height"
+        android:contentDescription="@string/photo_of_the_day_stub"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/main_picture_fragment"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_input_layout"
+        app:srcCompat="@drawable/ic_no_photo" />
+
+</FrameLayout>

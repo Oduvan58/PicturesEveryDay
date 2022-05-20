@@ -5,18 +5,18 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.*
 import android.widget.TextView
-import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import by.geekbrains.pictureseveryday.R
 import by.geekbrains.pictureseveryday.databinding.FragmentMainPictureBinding
+import by.geekbrains.pictureseveryday.utils.toast
 import by.geekbrains.pictureseveryday.view.MainActivity
 import by.geekbrains.pictureseveryday.view.details.SettingsFragment
+import by.geekbrains.pictureseveryday.view.viewpager.ViewPagerAdapter
 import by.geekbrains.pictureseveryday.viewmodel.AppState
 import by.geekbrains.pictureseveryday.viewmodel.MainPictureViewModel
-import coil.api.load
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 
@@ -51,10 +51,11 @@ class MainPictureFragment : Fragment() {
                     Uri.parse("https://en.wikipedia.org/wiki/${binding.textInputEditText.text.toString()}")
             })
         }
+        binding.mainViewPager.adapter = ViewPagerAdapter(requireActivity())
         setBottomSheetBehaviour(view.findViewById(R.id.bottom_sheet_container))
         bottomSheetHeader = view.findViewById(R.id.description_header_text_view_bottom_sheet)
         bottomSheetContent = view.findViewById(R.id.description_text_view_bottom_sheet)
-        viewModel.getLiveData()
+        viewModel.getLiveData(null)
             .observe(viewLifecycleOwner) { renderData(it) }
     }
 
@@ -70,11 +71,11 @@ class MainPictureFragment : Fragment() {
                 if (url.isNullOrEmpty()) {
                     toast("Url is empty")
                 } else {
-                    binding.mainImageView.load(url) {
-                        lifecycle(this@MainPictureFragment)
-                        error(R.drawable.ic_load_error)
-                        placeholder(R.drawable.ic_no_photo)
-                    }
+//                    binding.mainImageView.load(url) {
+//                        lifecycle(this@MainPictureFragment)
+//                        error(R.drawable.ic_load_error)
+//                        placeholder(R.drawable.ic_no_photo)
+//                    }
                     bottomSheetHeader.text = serverResponseData.title
                     bottomSheetContent.text = serverResponseData.explanation
                 }
@@ -94,13 +95,6 @@ class MainPictureFragment : Fragment() {
                 }
                 toast(state.error.message)
             }
-        }
-    }
-
-    private fun Fragment.toast(string: String?) {
-        Toast.makeText(context, string, Toast.LENGTH_SHORT).apply {
-            setGravity(Gravity.BOTTOM, 0, 250)
-            show()
         }
     }
 

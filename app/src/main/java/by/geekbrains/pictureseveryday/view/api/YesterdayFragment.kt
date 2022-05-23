@@ -1,4 +1,4 @@
-package by.geekbrains.pictureseveryday.view.viewpager
+package by.geekbrains.pictureseveryday.view.api
 
 import android.os.Bundle
 import android.view.LayoutInflater

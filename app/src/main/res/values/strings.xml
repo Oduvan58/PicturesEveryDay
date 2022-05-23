@@ -13,4 +13,8 @@
     <string name="app_theme">App Theme</string>
     <string name="blue_theme">Blue Theme</string>
     <string name="red_theme">Red Theme</string>
+
+    <string name="today">Сегодня</string>
+    <string name="yesterday">Вчера</string>
+    <string name="the_day_before_yesterday">Позавчера</string>
 </resources>

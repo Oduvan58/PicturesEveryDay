@@ -1,4 +1,4 @@
-package by.geekbrains.pictureseveryday.view.viewpager
+package by.geekbrains.pictureseveryday.view.api
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,15 +7,17 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import by.geekbrains.pictureseveryday.R
-import by.geekbrains.pictureseveryday.databinding.FragmentTodayBinding
+import by.geekbrains.pictureseveryday.databinding.FragmentBeforeYesterdayBinding
 import by.geekbrains.pictureseveryday.utils.toast
 import by.geekbrains.pictureseveryday.viewmodel.AppState
 import by.geekbrains.pictureseveryday.viewmodel.MainPictureViewModel
 import coil.api.load
+import java.text.SimpleDateFormat
+import java.util.*
 
-class TodayFragment : Fragment() {
+class BeforeYesterdayFragment : Fragment() {
 
-    private var _binding: FragmentTodayBinding? = null
+    private var _binding: FragmentBeforeYesterdayBinding? = null
     private val binding get() = _binding!!
 
     private val viewModel: MainPictureViewModel by lazy {
@@ -27,13 +29,20 @@ class TodayFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        _binding = FragmentTodayBinding.inflate(inflater, container, false)
+        _binding = FragmentBeforeYesterdayBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getLiveData(null).observe(viewLifecycleOwner) { renderData(it) }
+        viewModel.getLiveData(beforeYesterdayDate()).observe(viewLifecycleOwner) { renderData(it) }
+    }
+
+    private fun beforeYesterdayDate(): String {
+        val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val calendar = Calendar.getInstance()
+        calendar.add(Calendar.DATE, -2)
+        return formatter.format(calendar.time)
     }
 
     private fun renderData(state: AppState) {
@@ -44,8 +53,8 @@ class TodayFragment : Fragment() {
                 if (url.isNullOrEmpty()) {
                     toast("Url is empty")
                 } else {
-                    binding.todayImageView.load(url) {
-                        lifecycle(this@TodayFragment)
+                    binding.beforeYesterdayImageView.load(url) {
+                        lifecycle(this@BeforeYesterdayFragment)
                         error(R.drawable.ic_load_error)
                         placeholder(R.drawable.ic_no_photo)
                     }
@@ -65,6 +74,6 @@ class TodayFragment : Fragment() {
     }
 
     companion object {
-        fun newInstance() = TodayFragment()
+        fun newInstance() = BeforeYesterdayFragment()
     }
 }

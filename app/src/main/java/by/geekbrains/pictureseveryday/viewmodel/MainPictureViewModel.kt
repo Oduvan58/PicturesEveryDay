@@ -3,7 +3,9 @@ package by.geekbrains.pictureseveryday.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import by.geekbrains.pictureseveryday.App
 import by.geekbrains.pictureseveryday.BuildConfig
+import by.geekbrains.pictureseveryday.R
 import by.geekbrains.pictureseveryday.domain.MainPictureServerResponseData
 import by.geekbrains.pictureseveryday.repository.MainPictureRetrofitImpl
 import retrofit2.Call
@@ -24,7 +26,7 @@ class MainPictureViewModel(
         liveDataToObserve.value = AppState.Loading
         val apiKey: String = BuildConfig.NASA_API_KEY
         if (apiKey.isBlank()) {
-            AppState.Error(Throwable("You need API key"))
+            AppState.Error(Throwable(App.appInstance.getString(R.string.text_error_not_api_key)))
         } else {
             if (date.isNullOrEmpty()) {
                 retrofitImpl
@@ -43,7 +45,7 @@ class MainPictureViewModel(
                                 val message = response.message()
                                 if (message.isNullOrEmpty()) {
                                     liveDataToObserve.value = AppState.Error(
-                                        Throwable("Unidentified error")
+                                        Throwable(App.appInstance.getString(R.string.text_error))
                                     )
                                 } else {
                                     liveDataToObserve.value = AppState.Error(
@@ -78,7 +80,7 @@ class MainPictureViewModel(
                                 val message = response.message()
                                 if (message.isNullOrEmpty()) {
                                     liveDataToObserve.value = AppState.Error(
-                                        Throwable("Unidentified error")
+                                        Throwable(App.appInstance.getString(R.string.text_error))
                                     )
                                 } else {
                                     liveDataToObserve.value = AppState.Error(

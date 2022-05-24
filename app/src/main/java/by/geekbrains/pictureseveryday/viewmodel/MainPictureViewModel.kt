@@ -3,7 +3,9 @@ package by.geekbrains.pictureseveryday.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import by.geekbrains.pictureseveryday.App
 import by.geekbrains.pictureseveryday.BuildConfig
+import by.geekbrains.pictureseveryday.R
 import by.geekbrains.pictureseveryday.domain.MainPictureServerResponseData
 import by.geekbrains.pictureseveryday.repository.MainPictureRetrofitImpl
 import retrofit2.Call
@@ -15,50 +17,87 @@ class MainPictureViewModel(
     private val retrofitImpl: MainPictureRetrofitImpl = MainPictureRetrofitImpl(),
 ) : ViewModel() {
 
-    fun getLiveData(): LiveData<AppState> {
-        sendServerRequest()
+    fun getLiveData(date: String?): LiveData<AppState> {
+        sendServerRequest(date)
         return liveDataToObserve
     }
 
-    private fun sendServerRequest() {
+    private fun sendServerRequest(date: String?) {
         liveDataToObserve.value = AppState.Loading
         val apiKey: String = BuildConfig.NASA_API_KEY
         if (apiKey.isBlank()) {
-            AppState.Error(Throwable("You need API key"))
+            AppState.Error(Throwable(App.appInstance.getString(R.string.text_error_not_api_key)))
         } else {
-            retrofitImpl
-                .getRetrofitImpl()
-                .getPictureOfTheDay(apiKey)
-                .enqueue(object : Callback<MainPictureServerResponseData> {
-                    override fun onResponse(
-                        call: Call<MainPictureServerResponseData>,
-                        response: Response<MainPictureServerResponseData>,
-                    ) {
-                        if (response.isSuccessful && response.body() != null) {
-                            liveDataToObserve.value = AppState.Success(
-                                response.body()!!
-                            )
-                        } else {
-                            val message = response.message()
-                            if (message.isNullOrEmpty()) {
-                                liveDataToObserve.value = AppState.Error(
-                                    Throwable("Unidentified error")
+            if (date.isNullOrEmpty()) {
+                retrofitImpl
+                    .getRetrofitImpl()
+                    .getPictureOfTheDay(apiKey)
+                    .enqueue(object : Callback<MainPictureServerResponseData> {
+                        override fun onResponse(
+                            call: Call<MainPictureServerResponseData>,
+                            response: Response<MainPictureServerResponseData>,
+                        ) {
+                            if (response.isSuccessful && response.body() != null) {
+                                liveDataToObserve.value = AppState.Success(
+                                    response.body()!!
                                 )
                             } else {
-                                liveDataToObserve.value = AppState.Error(
-                                    Throwable(message)
-                                )
+                                val message = response.message()
+                                if (message.isNullOrEmpty()) {
+                                    liveDataToObserve.value = AppState.Error(
+                                        Throwable(App.appInstance.getString(R.string.text_error))
+                                    )
+                                } else {
+                                    liveDataToObserve.value = AppState.Error(
+                                        Throwable(message)
+                                    )
+                                }
                             }
                         }
-                    }
 
-                    override fun onFailure(
-                        call: Call<MainPictureServerResponseData>,
-                        t: Throwable,
-                    ) {
-                        liveDataToObserve.value = AppState.Error(t)
-                    }
-                })
+                        override fun onFailure(
+                            call: Call<MainPictureServerResponseData>,
+                            t: Throwable,
+                        ) {
+                            liveDataToObserve.value = AppState.Error(t)
+                        }
+                    })
+            } else {
+                retrofitImpl
+                    .getRetrofitImpl()
+                    .getPictureOfTheDay(date, apiKey)
+                    .enqueue(object : Callback<MainPictureServerResponseData> {
+
+                        override fun onResponse(
+                            call: Call<MainPictureServerResponseData>,
+                            response: Response<MainPictureServerResponseData>,
+                        ) {
+                            if (response.isSuccessful && response.body() != null) {
+                                liveDataToObserve.value = AppState.Success(
+                                    response.body()!!
+                                )
+                            } else {
+                                val message = response.message()
+                                if (message.isNullOrEmpty()) {
+                                    liveDataToObserve.value = AppState.Error(
+                                        Throwable(App.appInstance.getString(R.string.text_error))
+                                    )
+                                } else {
+                                    liveDataToObserve.value = AppState.Error(
+                                        Throwable(message)
+                                    )
+                                }
+                            }
+                        }
+
+                        override fun onFailure(
+                            call: Call<MainPictureServerResponseData>,
+                            t: Throwable,
+                        ) {
+                            liveDataToObserve.value = AppState.Error(t)
+                        }
+                    })
+            }
         }
     }
 }

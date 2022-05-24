@@ -5,20 +5,25 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.*
 import android.widget.TextView
-import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import by.geekbrains.pictureseveryday.R
 import by.geekbrains.pictureseveryday.databinding.FragmentMainPictureBinding
+import by.geekbrains.pictureseveryday.domain.FragmentsFactory
+import by.geekbrains.pictureseveryday.utils.toast
 import by.geekbrains.pictureseveryday.view.MainActivity
+import by.geekbrains.pictureseveryday.view.api.BeforeYesterdayFragment
+import by.geekbrains.pictureseveryday.view.api.TodayFragment
+import by.geekbrains.pictureseveryday.view.api.ViewPagerAdapter
+import by.geekbrains.pictureseveryday.view.api.YesterdayFragment
 import by.geekbrains.pictureseveryday.view.details.SettingsFragment
 import by.geekbrains.pictureseveryday.viewmodel.AppState
 import by.geekbrains.pictureseveryday.viewmodel.MainPictureViewModel
-import coil.api.load
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.tabs.TabLayoutMediator
 
 class MainPictureFragment : Fragment() {
 
@@ -28,6 +33,20 @@ class MainPictureFragment : Fragment() {
     private val viewModel: MainPictureViewModel by lazy {
         ViewModelProvider(this)[MainPictureViewModel::class.java]
     }
+
+    private val fragments by lazy { listFragments() }
+
+    private fun listFragments() = listOf(
+        FragmentsFactory(
+            getString(R.string.today)
+        ) { TodayFragment.newInstance() },
+        FragmentsFactory(
+            getString(R.string.yesterday)
+        ) { YesterdayFragment.newInstance() },
+        FragmentsFactory(
+            getString(R.string.the_day_before_yesterday)
+        ) { BeforeYesterdayFragment.newInstance() }
+    )
 
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
     private lateinit var bottomSheetHeader: TextView
@@ -54,7 +73,13 @@ class MainPictureFragment : Fragment() {
         setBottomSheetBehaviour(view.findViewById(R.id.bottom_sheet_container))
         bottomSheetHeader = view.findViewById(R.id.description_header_text_view_bottom_sheet)
         bottomSheetContent = view.findViewById(R.id.description_text_view_bottom_sheet)
-        viewModel.getLiveData()
+        binding.mainViewPager.adapter = ViewPagerAdapter(this, fragments)
+        TabLayoutMediator(binding.tabLayout, binding.mainViewPager) { tab, position ->
+            fragments[position].let {
+                tab.text = it.title
+            }
+        }.attach()
+        viewModel.getLiveData(null)
             .observe(viewLifecycleOwner) { renderData(it) }
     }
 
@@ -70,11 +95,6 @@ class MainPictureFragment : Fragment() {
                 if (url.isNullOrEmpty()) {
                     toast("Url is empty")
                 } else {
-                    binding.mainImageView.load(url) {
-                        lifecycle(this@MainPictureFragment)
-                        error(R.drawable.ic_load_error)
-                        placeholder(R.drawable.ic_no_photo)
-                    }
                     bottomSheetHeader.text = serverResponseData.title
                     bottomSheetContent.text = serverResponseData.explanation
                 }
@@ -94,13 +114,6 @@ class MainPictureFragment : Fragment() {
                 }
                 toast(state.error.message)
             }
-        }
-    }
-
-    private fun Fragment.toast(string: String?) {
-        Toast.makeText(context, string, Toast.LENGTH_SHORT).apply {
-            setGravity(Gravity.BOTTOM, 0, 250)
-            show()
         }
     }
 

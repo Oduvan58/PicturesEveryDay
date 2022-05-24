@@ -26,4 +26,8 @@
     <dimen name="horizontal_scroll_in_settings_margin_top">15dp</dimen>
     <dimen name="chip_text_size">20sp</dimen>
     <dimen name="chip_from_chipgroup_margin_start_end">30dp</dimen>
+
+    <dimen name="collapsing_toolbar_app_bar_height">180dp</dimen>
+    <dimen name="collapsing_toolbar_fab_margin">16dp</dimen>
+    <dimen name="collapsing_toolbar_text_margin">16dp</dimen>
 </resources>

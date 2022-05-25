@@ -19,4 +19,6 @@
     <string name="the_day_before_yesterday">Позавчера</string>
     <string name="text_error">Unidentified error</string>
     <string name="text_error_not_api_key">You need API key</string>
+
+    <string name="greeting_message">Вас приветствует Pictures Everyday. Для начала работы нажмите здесь!</string>
 </resources>

@@ -10,7 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import by.geekbrains.pictureseveryday.R
-import by.geekbrains.pictureseveryday.databinding.FragmentMainPictureBinding
+import by.geekbrains.pictureseveryday.databinding.FragmentMainPictureStartBinding
 import by.geekbrains.pictureseveryday.domain.FragmentsFactory
 import by.geekbrains.pictureseveryday.utils.toast
 import by.geekbrains.pictureseveryday.view.CollapsingToolbarActivity
@@ -31,7 +31,7 @@ const val BOTTOM_SHEET_CONTENT = "BOTTOM_SHEET_CONTENT"
 
 class MainPictureFragment : Fragment() {
 
-    private var _binding: FragmentMainPictureBinding? = null
+    private var _binding: FragmentMainPictureStartBinding? = null
     private val binding get() = _binding!!
 
     private val viewModel: MainPictureViewModel by lazy {
@@ -61,7 +61,7 @@ class MainPictureFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        _binding = FragmentMainPictureBinding.inflate(inflater, container, false)
+        _binding = FragmentMainPictureStartBinding.inflate(inflater, container, false)
         return binding.root
     }
 

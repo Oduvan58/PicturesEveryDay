@@ -3,17 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".view.main.MainPictureFragment">
 
     <androidx.constraintlayout.motion.widget.MotionLayout
         android:id="@+id/main_picture_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="@dimen/margin_bottom_main_picture_fragment"
-        android:paddingStart="@dimen/padding_main_picture_fragment"
-        android:paddingEnd="@dimen/padding_main_picture_fragment"
-        app:layoutDescription="@xml/motion_scene"
-        tools:ignore="MotionLayoutInvalidSceneFileReference">
+        android:paddingStart="@dimen/padding_start_main_picture_fragment"
+        android:paddingEnd="@dimen/padding_end_main_picture_fragment"
+        app:layoutDescription="@xml/motion_scene">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/text_input_layout"
@@ -34,7 +34,7 @@
             app:helperText="@string/wiki_helper_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/main_picture_fragment">
+            app:layout_constraintTop_toTopOf="@+id/main_motion_layout">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/text_input_edit_text"
@@ -48,8 +48,15 @@
             style="@style/equilateral_image_view_style"
             android:layout_width="match_parent"
             android:layout_height="@dimen/image_view_layout_height"
+            android:background="?attr/colorSecondary"
             android:contentDescription="@string/greeting_message"
-            android:visibility="gone"
+            android:paddingTop="@dimen/greeting_message_padding_top"
+            android:text="@string/greeting_message"
+            android:textAlignment="center"
+            android:textColor="?attr/colorOnSecondary"
+            android:textSize="@dimen/greeting_message_text_size"
+            android:textStyle="bold"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/main_motion_layout"
             app:layout_constraintStart_toStartOf="parent"
@@ -61,16 +68,16 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/image_view_layout_height"
             android:contentDescription="@string/photo_of_the_day_stub"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/main_picture_fragment"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_input_layout"
+            android:visibility="gone"
+            app:layout_constraintEnd_toStartOf="@id/main_motion_layout"
+            app:layout_constraintTop_toBottomOf="@id/main_motion_layout"
             app:srcCompat="@drawable/ic_no_photo" />
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             app:layout_constraintTop_toBottomOf="@id/text_input_layout" />
 
         <FrameLayout
@@ -80,7 +87,8 @@
             android:background="@color/white"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="@id/main_view_pager">
+            app:layout_constraintTop_toTopOf="@id/main_view_pager"
+            tools:visibility="gone">
 
             <ProgressBar
                 style="?android:attr/progressBarStyleLarge"
@@ -108,7 +116,7 @@
         style="@style/fab_style"
         app:layout_anchor="@id/bottom_app_bar"
         app:srcCompat="@drawable/ic_baseline_add_24"
-        app:tint="@color/white"
+        app:tint="#FFFFFF"
         tools:ignore="ContentDescription" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

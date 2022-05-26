@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:motion="http://schemas.android.com/apk/res-auto">
+    <Transition
+        motion:constraintSetEnd="@layout/fragment_main_picture"
+        motion:constraintSetStart="@layout/fragment_main_picture_start"
+        motion:duration="3000">
+        <OnClick motion:targetId="@id/greeting_message" />
+    </Transition>
+</MotionScene>

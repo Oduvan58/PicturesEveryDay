@@ -10,9 +10,10 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import by.geekbrains.pictureseveryday.R
-import by.geekbrains.pictureseveryday.databinding.FragmentMainPictureBinding
+import by.geekbrains.pictureseveryday.databinding.FragmentMainPictureStartBinding
 import by.geekbrains.pictureseveryday.domain.FragmentsFactory
 import by.geekbrains.pictureseveryday.utils.toast
+import by.geekbrains.pictureseveryday.view.CollapsingToolbarActivity
 import by.geekbrains.pictureseveryday.view.MainActivity
 import by.geekbrains.pictureseveryday.view.api.BeforeYesterdayFragment
 import by.geekbrains.pictureseveryday.view.api.TodayFragment
@@ -25,9 +26,12 @@ import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.tabs.TabLayoutMediator
 
+const val BOTTOM_SHEET_HEADER = "BOTTOM_SHEET_HEADER"
+const val BOTTOM_SHEET_CONTENT = "BOTTOM_SHEET_CONTENT"
+
 class MainPictureFragment : Fragment() {
 
-    private var _binding: FragmentMainPictureBinding? = null
+    private var _binding: FragmentMainPictureStartBinding? = null
     private val binding get() = _binding!!
 
     private val viewModel: MainPictureViewModel by lazy {
@@ -57,7 +61,7 @@ class MainPictureFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        _binding = FragmentMainPictureBinding.inflate(inflater, container, false)
+        _binding = FragmentMainPictureStartBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -145,8 +149,11 @@ class MainPictureFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val intent = Intent(context, CollapsingToolbarActivity::class.java)
+        intent.putExtra(BOTTOM_SHEET_HEADER, bottomSheetHeader.text)
+        intent.putExtra(BOTTOM_SHEET_CONTENT, bottomSheetContent.text)
         when (item.itemId) {
-            R.id.app_bar_favorite -> toast(getString(R.string.favourite))
+            R.id.app_bar_favorite -> startActivity(intent)
             R.id.app_bar_settings -> activity?.apply {
                 this.supportFragmentManager
                     .beginTransaction()

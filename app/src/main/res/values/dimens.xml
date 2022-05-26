@@ -33,4 +33,23 @@
 
     <dimen name="greeting_message_padding_top">70dp</dimen>
     <dimen name="greeting_message_text_size">30sp</dimen>
+
+    <dimen name="today_fragment_title_text_size">20sp</dimen>
+    <dimen name="today_title_padding_start">24dp</dimen>
+    <dimen name="today_title_padding_top">8dp</dimen>
+    <dimen name="today_title_padding_end">24dp</dimen>
+    <dimen name="today_title_padding_bottom">8dp</dimen>
+    <dimen name="today_title_margin_start">48dp</dimen>
+    <dimen name="yesterday_fragment_title_text_size">20sp</dimen>
+    <dimen name="yesterday_title_padding_start">24dp</dimen>
+    <dimen name="yesterday_title_padding_top">8dp</dimen>
+    <dimen name="yesterday_title_padding_end">24dp</dimen>
+    <dimen name="yesterday_title_padding_bottom">8dp</dimen>
+    <dimen name="yesterday_title_margin_start">48dp</dimen>
+    <dimen name="before_yesterday_fragment_title_text_size">20sp</dimen>
+    <dimen name="before_yesterday_title_padding_start">24dp</dimen>
+    <dimen name="before_yesterday_title_padding_top">8dp</dimen>
+    <dimen name="before_yesterday_title_padding_end">24dp</dimen>
+    <dimen name="before_yesterday_title_padding_bottom">8dp</dimen>
+    <dimen name="before_yesterday_title_margin_start">48dp</dimen>
 </resources>

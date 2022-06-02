@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/recycler_item_note_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/note_date_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/note_date_margin_start"
+        android:layout_marginTop="@dimen/note_date_margin_top"
+        android:textColor="@color/white"
+        android:textSize="@dimen/note_date_text_size"
+        tools:text="@string/default_date_text" />
+
+    <TextView
+        android:id="@+id/note_description_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/note_date_margin_start"
+        android:layout_marginTop="@dimen/note_date_margin_top"
+        android:textColor="@color/white"
+        android:textSize="@dimen/recycler_view_item_text_size"
+        tools:text="@string/default_description_text" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/note_edit_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        android:padding="@dimen/note_edit_text_padding"
+        android:textColor="@color/white"
+        android:textSize="@dimen/note_edit_text_size"
+        android:visibility="gone"
+        tools:text="@string/input_text"
+        tools:visibility="visible" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/recycler_item_line_height"
+        android:layout_marginTop="@dimen/recycler_item_line_margin_top"
+        android:background="?attr/colorOnPrimary" />
+
+</LinearLayout>

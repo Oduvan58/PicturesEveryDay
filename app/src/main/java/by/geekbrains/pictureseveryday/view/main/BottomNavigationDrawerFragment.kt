@@ -1,11 +1,13 @@
 package by.geekbrains.pictureseveryday.view.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import by.geekbrains.pictureseveryday.R
+import by.geekbrains.pictureseveryday.view.notes.NotesActivity
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.navigation.NavigationView
 
@@ -34,6 +36,9 @@ class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
                     context, R.string.screen_send,
                     Toast.LENGTH_SHORT
                 ).show()
+                R.id.notes -> activity?.let {
+                    startActivity(Intent(it, NotesActivity::class.java))
+                }
             }
             true
         }

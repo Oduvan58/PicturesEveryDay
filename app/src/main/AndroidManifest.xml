@@ -16,6 +16,9 @@
             android:name=".view.CollapsingToolbarActivity"
             android:exported="false" />
         <activity
+            android:name=".view.notes.NotesActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.MainActivity"
             android:exported="true">
             <intent-filter>

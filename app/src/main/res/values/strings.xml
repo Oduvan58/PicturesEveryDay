@@ -25,4 +25,10 @@
     <string name="today_fragment_title">Today Title</string>
     <string name="yesterday_fragment_title">Yesterday Title</string>
     <string name="before_yesterday_fragment_title">Before Yesterday Title</string>
+
+    <string name="recycler_header">Заметки</string>
+    <string name="screen_notes">Notes</string>
+    <string name="default_date_text">Some date</string>
+    <string name="default_description_text">Some text</string>
+    <string name="input_text">Some Edit Text</string>
 </resources>

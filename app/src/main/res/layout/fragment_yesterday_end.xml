@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <by.geekbrains.pictureseveryday.view.main.EquilateralImageView
+        android:id="@+id/yesterday_image_view"
+        style="@style/equilateral_image_view_style"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/image_view_layout_height"
+        android:contentDescription="@string/photo_of_the_day_stub"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_no_photo" />
+
+    <TextView
+        android:id="@+id/yesterday_title_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/yesterday_title_margin_start"
+        android:background="?attr/colorPrimaryVariant"
+        android:paddingStart="@dimen/yesterday_title_padding_start"
+        android:paddingTop="@dimen/yesterday_title_padding_top"
+        android:paddingEnd="@dimen/yesterday_title_padding_end"
+        android:paddingBottom="@dimen/yesterday_title_padding_bottom"
+        android:text="@string/yesterday_fragment_title"
+        android:textAlignment="center"
+        android:textColor="?attr/colorOnPrimary"
+        android:textSize="@dimen/yesterday_fragment_title_text_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

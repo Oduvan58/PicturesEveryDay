@@ -21,4 +21,8 @@
     <string name="text_error_not_api_key">You need API key</string>
 
     <string name="greeting_message">Вас приветствует Pictures Everyday. Для начала работы нажмите здесь!</string>
+
+    <string name="today_fragment_title">Today Title</string>
+    <string name="yesterday_fragment_title">Yesterday Title</string>
+    <string name="before_yesterday_fragment_title">Before Yesterday Title</string>
 </resources>

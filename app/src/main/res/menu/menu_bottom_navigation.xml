@@ -9,5 +9,9 @@
             android:id="@+id/send"
             android:icon="@drawable/ic_baseline_send_24"
             android:title="@string/screen_send" />
+        <item
+            android:id="@+id/notes"
+            android:icon="@drawable/ic_baseline_notes_24"
+            android:title="@string/screen_notes" />
     </group>
 </menu>

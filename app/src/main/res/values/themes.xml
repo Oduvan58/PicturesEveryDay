@@ -14,7 +14,7 @@
         <!-- Customize your theme here. -->
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Title</item>
 
-        <item name="android:fontFamily">@font/monterey</item>
+        <item name="fontFamily">@font/monterey</item>
     </style>
 
     <style name="MyBlueTheme" parent="AppTheme">
@@ -61,11 +61,13 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="fontFamily">@font/monterey</item>
     </style>
 
     <style name="Theme.COLLAPSING_TOOLBAR_LAYOUT.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="fontFamily">@font/monterey</item>
     </style>
 
     <style name="Theme.COLLAPSING_TOOLBAR_LAYOUT.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

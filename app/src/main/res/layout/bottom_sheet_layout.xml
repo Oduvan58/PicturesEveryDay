@@ -24,6 +24,7 @@
         android:id="@+id/description_header_text_view_bottom_sheet"
         style="@style/bottom_sheet_text_view_style"
         android:layout_marginTop="@dimen/header_margin_top_bottom_sheet"
+        android:fontFamily="@font/stardos_stencil"
         android:textAppearance="@style/BottomSheetHeaderTextAppearance"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

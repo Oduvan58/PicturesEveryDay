@@ -1,8 +1,13 @@
 package by.geekbrains.pictureseveryday.view.main
 
+import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Typeface.BOLD_ITALIC
 import android.net.Uri
 import android.os.Bundle
+import android.text.Layout
+import android.text.SpannableString
+import android.text.style.*
 import android.view.*
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -99,8 +104,12 @@ class MainPictureFragment : Fragment() {
                 if (url.isNullOrEmpty()) {
                     toast("Url is empty")
                 } else {
-                    bottomSheetHeader.text = serverResponseData.title
-                    bottomSheetContent.text = serverResponseData.explanation
+                    if (serverResponseData.title != null && serverResponseData.explanation != null) {
+                        setBottomSheetTextSpanned(
+                            title = serverResponseData.title,
+                            explanation = serverResponseData.explanation
+                        )
+                    }
                 }
             }
 
@@ -119,6 +128,57 @@ class MainPictureFragment : Fragment() {
                 toast(state.error.message)
             }
         }
+    }
+
+    @SuppressLint("ResourceAsColor")
+    private fun setBottomSheetTextSpanned(title: String, explanation: String) {
+        val spannableTitle = SpannableString(title)
+        spannableTitle.setSpan(
+            BackgroundColorSpan(R.color.lime_green),
+            0, spannableTitle.length,
+            SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+
+        spannableTitle.setSpan(
+            ForegroundColorSpan(R.color.dark_slate_blue),
+            0, spannableTitle.length,
+            SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+
+        spannableTitle.setSpan(
+            StyleSpan(BOLD_ITALIC),
+            0, spannableTitle.length,
+            SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+
+        spannableTitle.setSpan(
+            UnderlineSpan(),
+            0, spannableTitle.length,
+            SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+
+        spannableTitle.setSpan(
+            RelativeSizeSpan(1.5f),
+            0, spannableTitle.length,
+            SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+
+        bottomSheetHeader.text = spannableTitle
+
+        val spannableContent = SpannableString(explanation)
+        spannableContent.setSpan(
+            AlignmentSpan.Standard(Layout.Alignment.ALIGN_CENTER),
+            0, spannableContent.length,
+            SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+
+        spannableContent.setSpan(
+            RelativeSizeSpan(1.2f),
+            0, spannableContent.length,
+            SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+
+        bottomSheetContent.text = spannableContent
     }
 
     private fun setBottomSheetBehaviour(bottomSheet: ConstraintLayout) {
